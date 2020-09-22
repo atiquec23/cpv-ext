@@ -21,7 +21,7 @@ import java.awt.Font;
 
 public class PgpDecrypt {
 
-	private JFrame frame;
+	private JFrame frmPeriferia;
 	private JTextField box1;
 	private JTextField box2;
 	private JTextField box3;
@@ -35,7 +35,7 @@ public class PgpDecrypt {
 				try {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					PgpDecrypt window = new PgpDecrypt();
-					window.frame.setVisible(true);
+					window.frmPeriferia.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -54,49 +54,53 @@ public class PgpDecrypt {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 250);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmPeriferia = new JFrame();
+		frmPeriferia.setTitle("Periferia");
+		frmPeriferia.setBounds(100, 100, 450, 250);
+		frmPeriferia.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmPeriferia.getContentPane().setLayout(null);
 
 		JLabel lblCifrarPgp = new JLabel("DESCIFRAR PGP");
-		lblCifrarPgp.setFont(new Font("Sitka Heading", Font.PLAIN, 15));
+		lblCifrarPgp.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblCifrarPgp.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCifrarPgp.setBounds(126, 11, 157, 23);
-		frame.getContentPane().add(lblCifrarPgp);
+		lblCifrarPgp.setBounds(131, 11, 157, 23);
+		frmPeriferia.getContentPane().add(lblCifrarPgp);
 
 		JLabel lblNewLabel = new JLabel("Clave privada: ");
-		lblNewLabel.setBounds(23, 62, 92, 14);
-		frame.getContentPane().add(lblNewLabel);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel.setBounds(23, 62, 84, 14);
+		frmPeriferia.getContentPane().add(lblNewLabel);
 
 		box1 = new JTextField();
 		box1.setBounds(114, 59, 250, 20);
-		frame.getContentPane().add(box1);
+		frmPeriferia.getContentPane().add(box1);
 		box1.setColumns(10);
 
 		box2 = new JTextField();
 		box2.setColumns(10);
 		box2.setBounds(114, 87, 119, 20);
-		frame.getContentPane().add(box2);
+		frmPeriferia.getContentPane().add(box2);
 
 		box3 = new JTextField();
 		box3.setColumns(10);
 		box3.setBounds(114, 116, 250, 20);
-		frame.getContentPane().add(box3);
+		frmPeriferia.getContentPane().add(box3);
 
 		JLabel lblFraseSecreta = new JLabel("Frase Secreta: ");
-		lblFraseSecreta.setBounds(23, 90, 92, 14);
-		frame.getContentPane().add(lblFraseSecreta);
+		lblFraseSecreta.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblFraseSecreta.setBounds(23, 90, 84, 14);
+		frmPeriferia.getContentPane().add(lblFraseSecreta);
 
 		JLabel lblNewLabel_1 = new JLabel("Archivo en pgp: ");
-		lblNewLabel_1.setBounds(23, 119, 92, 14);
-		frame.getContentPane().add(lblNewLabel_1);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_1.setBounds(23, 119, 84, 14);
+		frmPeriferia.getContentPane().add(lblNewLabel_1);
 
 		JButton btnNewButton_1 = new JButton("...");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser jf = new JFileChooser();
-				jf.showOpenDialog(frame);
+				jf.showOpenDialog(frmPeriferia);
 				File fl = jf.getSelectedFile();
 				if (fl != null) {
 					box1.setText(fl.getAbsolutePath());
@@ -104,13 +108,13 @@ public class PgpDecrypt {
 			}
 		});
 		btnNewButton_1.setBounds(366, 58, 45, 23);
-		frame.getContentPane().add(btnNewButton_1);
+		frmPeriferia.getContentPane().add(btnNewButton_1);
 
 		JButton btnNewButton_2 = new JButton("...");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser jf2 = new JFileChooser();
-				jf2.showOpenDialog(frame);
+				jf2.showOpenDialog(frmPeriferia);
 
 				File fl2 = jf2.getSelectedFile();
 				if (fl2 != null) {
@@ -120,7 +124,7 @@ public class PgpDecrypt {
 			}
 		});
 		btnNewButton_2.setBounds(366, 115, 45, 23);
-		frame.getContentPane().add(btnNewButton_2);
+		frmPeriferia.getContentPane().add(btnNewButton_2);
 
 		JButton btnNewButton = new JButton("Descifrar");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -133,16 +137,16 @@ public class PgpDecrypt {
 					in.close();
 					out.close();
 					keyIn.close();
-					JOptionPane.showMessageDialog(frame,
+					JOptionPane.showMessageDialog(frmPeriferia,
 							"Archivo descifrado con exito en la ruta: \n" + box3.getText().replace(".pgp", ".txt"),
 							"Ok", JOptionPane.INFORMATION_MESSAGE);
 				} catch (Exception e2) {
-					JOptionPane.showMessageDialog(frame, "Error al descifrar el archivo: " + e2, "Error",
+					JOptionPane.showMessageDialog(frmPeriferia, "Error al descifrar el archivo: " + e2, "Error",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
 		btnNewButton.setBounds(300, 153, 113, 30);
-		frame.getContentPane().add(btnNewButton);
+		frmPeriferia.getContentPane().add(btnNewButton);
 	}
 }
